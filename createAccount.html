@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wrist&Neck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./input.css" />
+    <script src="./signUp.js"></script>
+  </head>
+  <body>
+    <div
+      id="signUpModal"
+      class="modal2 container"
+      style="display: block !important"
+    >
+      <form class="" action="/action_page.php" method="post">
+        <div class="modal-content animate">
+          <div>
+            <img src="./images/watch.png" alt="watch" class="watchImg" />
+          </div>
+          <a href="./index.html">
+            <span
+              onclick="document.getElementById('loginModal').style.display='none'"
+              class="close"
+              title="Close Modal"
+              >&times;</span
+            >
+          </a>
+          <img src="./images/wristLogo.png" alt="Logo" class="wristLogo" />
+          <div class="modalMainContent">
+            <label for="email"><b>Email</b></label>
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              required
+            />
+
+            <label for="psw"><b>Password</b></label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="psw"
+              required
+            />
+
+            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <input
+              type="password"
+              placeholder="Repeat Password"
+              name="psw-repeat"
+              required
+            />
+
+            <div class="clearfix">
+              <button
+                type="button"
+                onclick="document.getElementById('signUpModal').style.display='none'"
+                class="cancelbtn"
+              >
+                <a href="./index.html">Cancel</a>
+              </button>
+              <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+          </div>
+            <div>
+            <img
+              src="./images/necklce.png"
+              alt="necklace"
+              class="necklaceImg"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

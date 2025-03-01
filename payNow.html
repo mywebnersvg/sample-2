@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./input.css"/>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 0.25em;
+            display: none;
+        }
+    </style>
+</head>
+<body id="detailBody">
+    <div class="paymentMethodContainer">
+        <h1 class="paymentMethodHead">
+            Payment Methods
+        </h1>
+        <div class="methodContainer">
+            <button type="button" onclick="creditcardbtn()">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="iconsvg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                      </svg>
+                      Credit/Debit Card
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="arrow">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                  </svg>
+                  
+            </button>
+        </div>
+    </div>
+    <div id="creditModal" class="modalMainContainer" style="top: -150%; transition: all 0.5s ease;">
+        <div class="modalDataContainer">
+            <form class="formBuyNow">
+                <div>
+                    <input type="number" id="cardNumber" placeholder="Enter Card Number"/>
+                    <div id="cardNumberError" class="error-message">Card number is required</div>
+                </div>
+                <div>
+                    <input type="date" id="expiryDate" placeholder="Enter Expiry Date"/>
+                    <div id="expiryDateError" class="error-message">Expiry date is required</div>
+                </div>
+                <div>
+                    <input type="number" id="cvv" placeholder="CVV"/>
+                    <div id="cvvError" class="error-message">CVV is required</div>
+                </div>
+                <div class="confirmedResult">
+                    <label>Total Amount:</label>
+                    <div style="font-size: 20px; font-weight: 700;" id="totalAmountDisplay"></div>
+                </div>
+                <button type="button" onclick="validateForm()" class="payNowBtn">
+                    Pay Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+      let creditModal = document.getElementById("creditModal");
+let detailBody = document.getElementById("detailBody");
+
+function creditcardbtn() {
+    if (creditModal.style.top === "-150%") {
+        creditModal.style.top = "0";
+        detailBody.style.overflow = "hidden";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Retrieve the total amount from localStorage
+        const totalAmount = localStorage.getItem("totalAmount");
+        const totalAmountDisplay = document.getElementById("totalAmountDisplay");
+
+        console.log("Total Amount from localStorage:", totalAmount);
+
+        // Display the total amount in the modal
+        if (totalAmount) {
+            totalAmountDisplay.textContent = `PKR ${totalAmount}`;
+        } else {
+            totalAmountDisplay.textContent = "Amount not available";
+        }
+    } else {
+        creditModal.style.top = "-150%";
+        detailBody.style.overflow = "auto";
+    }
+
+}
+
+
+function validateForm() {
+    let cardNumber = document.getElementById("cardNumber").value;
+    let expiryDate = document.getElementById("expiryDate").value;
+    let cvv = document.getElementById("cvv").value;
+    let isValid = true;
+
+    if (!cardNumber) {
+        document.getElementById("cardNumberError").style.display = "block";
+        isValid = false;
+    } else {
+        document.getElementById("cardNumberError").style.display = "none";
+    }
+
+    if (!expiryDate) {
+        document.getElementById("expiryDateError").style.display = "block";
+        isValid = false;
+    } else {
+        document.getElementById("expiryDateError").style.display = "none";
+    }
+
+    if (!cvv) {
+        document.getElementById("cvvError").style.display = "block";
+        isValid = false;
+    } else {
+        document.getElementById("cvvError").style.display = "none";
+    }
+
+    if (isValid) {
+        alert("Payment successful!");
+        // Here you can add your payment processing logic
+    }
+}
+    </script>
+</body>
+</html>

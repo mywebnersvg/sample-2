@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="./input.css"/>
+</head>
+<body>
+    <!-- Cart Page -->
+    <div class="accessoriePageContainer">
+        <h1 class="accesorieHeading">Your Cart</h1>
+        <div id="cartItems">
+            <!-- Template for cart items -->
+            <template id="cartItemTemplate">
+                <li class="cart-item" id="items">
+                    <a href="./acessorieDetail.html?index=" class="">
+                        <img src="" alt=""/>
+                        <span></span>
+                    </a>
+                </li>
+            </template>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartItemsContainer = document.getElementById("cartItems");
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItemTemplate = document.getElementById("cartItemTemplate");
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+            } else {
+                const cartList = document.createElement("ul");
+                cartList.className = "cart-list";
+
+                cart.forEach((item, index) => {
+                    // Clone the template content
+                    const clone = document.importNode(cartItemTemplate.content, true);
+
+                    // Populate the cloned template with data
+                    const link = clone.querySelector("a");
+                    link.href += index;
+
+                    const img = clone.querySelector("img");
+                    img.src = item.image || "default-image.jpg"; // Fallback image
+                    img.alt = item.name;
+
+                    const span = clone.querySelector("span");
+                    span.textContent = `${item.name} - PKR ${item.price} x ${item.quantity}`;
+
+                    // Append the cloned item to the cart list
+                    cartList.appendChild(clone);
+                });
+
+                // Append the cart list to the container
+                cartItemsContainer.appendChild(cartList);
+            }
+        });
+    </script>
+</body>
+</html>

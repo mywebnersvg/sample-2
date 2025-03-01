@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumar+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./input.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Kumar+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <style>
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 0.25em;
+            display: none;
+        }
+    </style>
+</head>
+<body id="detailBody">
+    <nav class="container">
+        <div class="navMain">
+        <div class="navContainer">
+          <div onclick="openNav()" class="menuContainer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="menuIcon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </div>
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              >&times;</a
+            >
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
+          </div>
+          <a href="./index.html" class="mainLogo">WristnNeck</a>
+          <div class="iconContainer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="iconNav"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+            <a style="display: flex;" class="loginButton" id="profileLink">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav" id="loginIcon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+              </svg>
+            </a>
+            <a href="./addCart.html" class="cartLink">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
+                <span id="cartCount">0</span>
+            </a>
+          </div>
+  
+        </div>
+      </div>
+      </nav>
+    <div class="accessorieDetailPageContainer">
+        <button onclick="goBack()" class="backHomeButton">Go Back</button>
+        <div class="accessorieDetailContainer">
+            <!-- Swiper Slider -->
+            <div class="swiper">
+                <div class="swiper-wrapper" id="productImages"></div>
+                <!-- Pagination & Navigation -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="detailAcceories">
+                <h1 id="productName" class="detailAcceroieName"></h1>
+                <p class="detailAccresoriePrice"><strong style="color: #FFD700;">Price- </strong> PKR <span id="productPrice"></span></p>
+                <p class="accrsorieOff"><span id="productDiscount"></span></p>
+                <p id="productDescription"></p>
+                <form>
+                    <label class="detailLabel">Enter Quantity</label>
+                    <input type="number" id="quantity" placeholder="Quantity" class="inputType" value="1">
+                    <div class="selectColorContainer">
+                        <label>Select Color -</label>
+                        <div class="selectColorMain">
+                            <div class="goldenColor selectColor"></div>
+                            <div class="blackColor selectColor"></div>
+                            <div class="silverColor selectColor"></div>
+                        </div>
+                    </div>
+                    <button onclick="buyNow()" type="button" class="buyNowBtn">
+                        Buy Now
+                    </button>
+                    <button type="button" class="addToCart" id="addToCartBtn">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="modalBuyNow" class="modalMainContainer" style="top: -150%; transition: all 0.5s ease;">
+        <div class="modalDataContainer hideScroll">
+            <button type="button" style="background-color: transparent; cursor: pointer; position: absolute; top: 20px; right:20px; border: none;" onclick="cancelBtn()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="" style="width:20px; height: 20px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+              
+            <form class="formBuyNow">
+                <div>
+                    <label>Name</label>
+                    <input type="text" id="name" placeholder="Enter Name"/>
+                    <div id="nameError" class="error-message">Name is required</div>
+                </div>
+                <div>
+                    <label>Phone Number</label>
+                    <input type="number" id="phoneNumber" placeholder="Enter Phone Number"/>
+                    <div id="phoneError" class="error-message">Phone number is required</div>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Enter Email"/>
+                    <div id="emailError" class="error-message">Email is required</div>
+                </div>
+                <div>
+                    <label>City</label>
+                    <input type="text" id="cityInput" placeholder="Enter City"/>
+                    <div id="cityError" class="error-message">City is required</div>
+                </div>
+                <div>
+                    <label>Address</label>
+                    <input type="text" id="address" placeholder="Enter Address, Street"/>
+                    <div id="addressError" class="error-message">Address is required</div>
+                </div>
+                
+                <div class="confirmedResult">
+                    <label>Confirmed Quantity-</label>
+                    <div style="font-size: 20px; font-weight: 700;" id="quantityValue"></div>
+                </div>
+                <div class="confirmedResult">
+                    <label>Total Item Price</label>
+                   <div style="font-size: 20px; font-weight: 700;" id="itemsTotalPrice"></div>
+                </div>
+                <div class="confirmedResult">
+                    <label>Shipping Value</label>
+                   <div style="font-size: 20px; font-weight: 700;" id="shippingValue">0</div>
+                </div>
+                <div class="confirmedResult">
+                    <label>Total Price</label>
+                   <div style="font-size: 20px; font-weight: 700;" id="FullPrice"></div>
+                </div>
+                <button type="button" onclick="payNow()" class="payNowBtn">
+                    Pay Now
+                </button>
+                <button type="button" onclick="cancelBtn()" class="cancelBtn"> Cancel </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Swiper.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        window.onclick = function (event) {
+  const loginModal = document.getElementById("loginModal");
+  const signUpModal = document.getElementById("signUpModal");
+
+  if (event.target === loginModal) {
+    loginModal.style.display = "none";
+  }
+  if (event.target === signUpModal) {
+    signUpModal.style.display = "none";
+  }
+};
+
+// Open and Close Navigation
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.left = "40px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("mySidenav").style.left = "-20%";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  // Update the profile link based on login status
+  const profileLink = document.querySelector("#profileLink");
+  if (profileLink) {
+    if (isLoggedIn) {
+      profileLink.href = "./logout.html";
+      profileLink.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav" id="loginIcon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+        </svg> Logout
+      `;
+    } else {
+      profileLink.href = "./login.html";
+      profileLink.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav" id="loginIcon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+        </svg> Login
+      `;
+    }
+  }
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+    if (product) {
+        document.getElementById("productName").textContent = product.name;
+        document.getElementById("productPrice").textContent = product.price;
+        document.getElementById("productDiscount").textContent = product.discount ? `OFF ${product.discount}%` : "";
+        document.getElementById("productDescription").textContent = product.description || "No description available";
+
+        const imageGallery = document.getElementById("productImages");
+        imageGallery.innerHTML = ""; // Clear previous images
+
+        if (product.images && product.images.length > 0) {
+            product.images.forEach(imageSrc => {
+                const slide = document.createElement("div");
+                slide.className = "swiper-slide";
+                slide.innerHTML = `<img src="${imageSrc}" alt="${product.name}">`;
+                imageGallery.appendChild(slide);
+            });
+
+            // Initialize Swiper
+            new Swiper('.swiper', {
+                loop: true,
+                spaceBetween: 10,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            });
+        } else {
+            imageGallery.innerHTML = "<p>No Image Available</p>";
+        }
+    }
+
+    // Color Selection Logic
+    const colorOptions = document.querySelectorAll(".selectColor");
+    const selectedColorText = document.getElementById("selectedColorText");
+    let selectedColor = "";
+
+    colorOptions.forEach(color => {
+        color.addEventListener("click", () => {
+            // Remove 'selected' class from all
+            colorOptions.forEach(c => c.classList.remove("selected"));
+
+            // Add 'selected' class to the clicked one
+            color.classList.add("selected");
+
+            // Update selected color text
+            selectedColor = color.getAttribute("data-color");
+            selectedColorText.textContent = selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1);
+        });
+    });
+});
+
+function goBack() {
+    window.history.back();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addToCartBtn = document.getElementById("addToCartBtn");
+    const cartCountElement = document.getElementById("cartCount");
+    const productName = document.getElementById("productName").textContent;
+    const productPrice = document.getElementById("productPrice").textContent;
+    const quantityInput = document.getElementById("quantity");
+    const colorOptions = document.querySelectorAll(".selectColor");
+
+    // Initialize cart from localStorage or create a new one
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Function to update cart count in the navbar
+    function updateCartCount() {
+        // Calculate total items in the cart
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCountElement.textContent = totalItems;
+        localStorage.setItem("cartCount", totalItems); // Store total items in localStorage
+    }
+    // Function to check if the product is already in the cart
+    function isProductInCart() {
+        return cart.some(item => item.name === productName);
+    }
+
+    function addProductToCart() {
+    const selectedColor = document.querySelector(".selectColor.selected")?.getAttribute("data-color") || "default";
+    const quantity = parseInt(quantityInput.value) || 1;
+    const productImage = document.querySelector(".swiper-slide img")?.src || "default-image.jpg"; // Ensure this is correct
+
+    const product = {
+        name: productName,
+        price: productPrice,
+        color: selectedColor,
+        quantity: quantity,
+        image: productImage // Ensure this is set correctly
+    };
+
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    addToCartBtn.textContent = "Added to Cart";
+}
+    // Function to remove product from the cart
+    function removeProductFromCart() {
+        cart = cart.filter(item => item.name !== productName);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        addToCartBtn.textContent = "Add to Cart";
+    }
+
+    // Initialize button state based on cart contents
+    if (isProductInCart()) {
+        addToCartBtn.textContent = "Added to Cart";
+    }
+
+    // Update cart count on page load
+    updateCartCount();
+
+    // Add event listener to the "Add to Cart" button
+    addToCartBtn.addEventListener("click", () => {
+        if (isProductInCart()) {
+            removeProductFromCart();
+        } else {
+            addProductToCart();
+        }
+    });
+
+    // Color selection logic
+    colorOptions.forEach(color => {
+        color.addEventListener("click", () => {
+            // Remove 'selected' class from all
+            colorOptions.forEach(c => c.classList.remove("selected"));
+
+            // Add 'selected' class to the clicked one
+            color.classList.add("selected");
+        });
+    });
+});
+
+let modalBuyNow = document.getElementById("modalBuyNow");
+let detailBody = document.getElementById("detailBody")
+
+function cancelBtn() {
+    modalBuyNow.style.top = "-150%";
+    detailBody.style.overflow = "auto";
+}
+
+function buyNow() {
+    const quantityInput = document.getElementById("quantity");
+    const quantityValue = document.getElementById("quantityValue");
+    const itemsTotalPrice = document.getElementById("itemsTotalPrice");
+    const shippingValueElement = document.getElementById("shippingValue");
+    const fullPriceElement = document.getElementById("FullPrice");
+    const productPrice = document.getElementById("productPrice").textContent;
+    const quantity = quantityInput.value || 1;
+
+    // Calculate total price
+    const totalPrice = parseFloat(productPrice) * parseInt(quantity);
+    const shippingPrice = parseFloat(shippingValueElement.textContent) || 0;
+    const fullPrice = totalPrice + shippingPrice;
+
+    // Update modal content
+    quantityValue.textContent = quantity;
+    itemsTotalPrice.textContent = `PKR ${totalPrice.toFixed(2)}`;
+    fullPriceElement.textContent = `PKR ${fullPrice.toFixed(2)}`;
+
+    if (modalBuyNow.style.top === "-150%") {
+        modalBuyNow.style.top = "0";
+        detailBody.style.overflow = "hidden";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        modalBuyNow.style.top = "-150%";
+        detailBody.style.overflow = "auto";
+    }
+}
+
+// Update the modal quantity and total price when the input changes
+document.getElementById("quantity").addEventListener("input", function() {
+    const quantityValue = document.getElementById("quantityValue");
+    const itemsTotalPrice = document.getElementById("itemsTotalPrice");
+    const shippingValueElement = document.getElementById("shippingValue");
+    const fullPriceElement = document.getElementById("FullPrice");
+    const productPrice = document.getElementById("productPrice").textContent;
+    const quantity = this.value || 1;
+
+    // Calculate total price
+    const totalPrice = parseFloat(productPrice) * parseInt(quantity);
+    const shippingPrice = parseFloat(shippingValueElement.textContent) || 0;
+    const fullPrice = totalPrice + shippingPrice;
+
+    // Update modal content
+    quantityValue.textContent = quantity;
+    itemsTotalPrice.textContent = `PKR ${totalPrice.toFixed(2)}`;
+    fullPriceElement.textContent = `PKR ${fullPrice.toFixed(2)}`;
+});
+
+// Add event listener to the city input to update shipping value
+document.getElementById("cityInput").addEventListener("input", function() {
+    const shippingValueElement = document.getElementById("shippingValue");
+    const itemsTotalPrice = document.getElementById("itemsTotalPrice");
+    const fullPriceElement = document.getElementById("FullPrice");
+    const city = this.value.trim().toLowerCase();
+
+    let shippingPrice = 0;
+    if (city === "lahore") {
+        shippingPrice = 500;
+    } else {
+        shippingPrice = 1500;
+    }
+
+    // Update shipping value
+    shippingValueElement.textContent = shippingPrice;
+
+    // Recalculate full price
+    const totalPrice = parseFloat(itemsTotalPrice.textContent.replace("PKR ", "")) || 0;
+    const fullPrice = totalPrice + shippingPrice;
+    fullPriceElement.textContent = `PKR ${fullPrice.toFixed(2)}`;
+});
+
+function payNow() {
+    // Get all input fields
+    const name = document.getElementById("name").value.trim();
+    const phoneNumber = document.getElementById("phoneNumber").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const city = document.getElementById("cityInput").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const quantity = document.getElementById("quantity").value.trim();
+    const selectedColor = document.querySelector(".selectColor.selected")?.getAttribute("data-color") || "default";
+
+    // Get all error message elements
+    const nameError = document.getElementById("nameError");
+    const phoneError = document.getElementById("phoneError");
+    const emailError = document.getElementById("emailError");
+    const cityError = document.getElementById("cityError");
+    const addressError = document.getElementById("addressError");
+
+    // Reset error messages
+    nameError.style.display = "none";
+    phoneError.style.display = "none";
+    emailError.style.display = "none";
+    cityError.style.display = "none";
+    addressError.style.display = "none";
+
+    let isValid = true;
+
+    // Validate name
+    if (!name) {
+        nameError.style.display = "block";
+        isValid = false;
+    }
+
+    // Validate phone number
+    if (!phoneNumber) {
+        phoneError.style.display = "block";
+        isValid = false;
+    } else if (!/^\d{10,}$/.test(phoneNumber)) { // Basic phone number validation
+        phoneError.textContent = "Invalid phone number";
+        phoneError.style.display = "block";
+        isValid = false;
+    }
+
+    // Validate email
+    if (!email) {
+        emailError.style.display = "block";
+        isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { // Basic email validation
+        emailError.textContent = "Invalid email address";
+        emailError.style.display = "block";
+        isValid = false;
+    }
+
+    // Validate city
+    if (!city) {
+        cityError.style.display = "block";
+        isValid = false;
+    }
+
+    // Validate address
+    if (!address) {
+        addressError.style.display = "block";
+        isValid = false;
+    }
+
+    // If all fields are valid, proceed with payment
+    if (isValid) {
+        const data = {
+            name,
+            email,
+            phoneNumber,
+            city,
+            address,
+            quantity,
+            color: selectedColor
+        };
+
+        fetch('http://localhost:3000/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+            alert('Order details sent successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to send order details.');
+        });
+    }
+
+}
+    </script>
+    
+</body>
+</html>

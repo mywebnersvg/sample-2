@@ -1,0 +1,1354 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Hind Siliguri", serif;
+  background-color: black;
+}
+.container {
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+}
+.navMain {
+  background-color: black;
+  position: sticky;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 0;
+  color: #FFFFFF;
+  box-shadow: 0 2px 19px -2px #575757;
+}
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  @media (max-width:640px) {
+   padding: 0 18px;
+  }
+}
+.wristLogo {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.sidenav {
+  height: fit-content;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 115px;
+  left: -20%;
+  background-color: #FFD700;
+  overflow-x: hidden;
+  transition: 0.5s;
+  border-radius: 12px;
+  padding: 28px 0;
+  opacity: 0.8;
+  backdrop-filter: blur(44px);
+  transition: all 0.5s ease;
+}
+
+.sidenav a {
+  padding: 8px 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+  margin-top: 25px;
+  text-align: center;
+  margin: 0;
+}
+
+.sidenav a:hover {
+ scale: 1.1;
+ font-weight: 700;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: -3px;
+  right: 10px;
+  font-size: 36px;
+  margin-left: 50px;
+  padding: 10px 20px;
+  margin-top: 0;
+}
+.menuIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  @media (max-width:640px) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+.iconNav {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    @media (max-width:640px) {
+        width: 18px;
+        height: 18px;
+      }
+}
+.iconNav:hover {
+  border-bottom: 1px solid white;
+}
+.iconContainer {
+    display: flex;
+    gap: 20px;
+    width: 33%;
+    justify-content: end;
+    align-items: center;
+    @media (max-width:768px) {
+        gap: 8px;
+        width: auto;
+    }
+}
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+  .modal {
+    padding: 0px;
+  }
+  .modal input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 17px 0;
+    display: inline-block;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 35px;
+    font-size: 16px;
+  }
+  
+  /* Set a style for all buttons */
+  .modal .Loginbutton {
+    background-color: black;
+    color: white;
+    padding: 15px 20px;
+    margin: 17px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 35px;
+    width: 100%;
+    max-width: 50%;
+    font-size: 16px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    @media (max-width:640px) {
+        width: 100%;
+    }
+  }
+  
+  .modal .Loginbutton:hover {
+    scale: 1.1;
+  }
+  
+  /* Extra styles for the cancel button */
+  .modal .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the image and position the close button */
+  .modal .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  .modal form {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  /* Modal Content/Box */
+  .modal .modal-content {
+    background-color: #E9EFEC;
+    width: 50%; /* Could be more or less, depending on screen size */
+    border-radius: 12px;
+    padding: 20px 0;
+    border-radius: 12px;
+    box-shadow: 5px 20px 50px #000;
+    margin: 0 auto;
+    position: relative;
+    @media (max-width:640px) {
+        width: calc(100% - 8%);
+    }
+    @media (min-width:641px) and (max-width:1024px) {
+        width: calc(100% - 20%);
+    }
+  }
+  
+  /* The Close Button (x) */
+  .modal .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .modal .close:hover,
+  .modal .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  /* Add Zoom Animation */
+  .modal .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .modal span.psw {
+       display: block;
+       float: none;
+    }
+    .modal .cancelbtn {
+       width: 100%;
+    }
+  }
+  .modal .formContainer {
+    width: 100%;
+    max-width: calc(100% - 9%);
+    margin: 0 auto;
+  }
+  .modal .formContainer label {
+    font-size: 20px;
+  }
+  .createAccount {
+    text-align: center;
+  }
+  .createAccount a {
+    margin-top: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: all 0.2s ease; 
+    text-align: center;
+  }
+  .createAccount:hover {
+    text-decoration: underline;
+  }
+  .modal2 {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+  .modal2 {
+    padding: 0px;
+  }
+  .modal2 input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 17px 0;
+    display: inline-block;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 35px;
+    font-size: 16px;
+  }
+  
+  /* Set a style for all buttons */
+  .modal2 .Loginbutton {
+    background-color: black;
+    color: white;
+    padding: 15px 20px;
+    margin: 17px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 35px;
+    width: 100%;
+    max-width: 50%;
+    font-size: 16px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    @media (max-width:640px) {
+        width: 100%;
+    }
+  }
+  
+  .modal2 .Loginbutton:hover {
+    scale: 1.1;
+  }
+  
+  /* Extra styles for the cancel button */
+  .modal2 .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the image and position the close button */
+  .modal2 .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  .modal2 form {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal2 span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  /* Modal Content/Box */
+  .modal2 .modal-content {
+    background-color: #E9EFEC;
+    width: 50%; /* Could be more or less, depending on screen size */
+    border-radius: 12px;
+    padding: 20px 0;
+    border-radius: 12px;
+    box-shadow: 5px 20px 50px #000;
+    margin: 0 auto;
+    position: relative;
+    @media (max-width:640px) {
+        width: calc(100% - 8%);
+    }
+    @media (min-width:641px) and (max-width:1024px) {
+        width: calc(100% - 20%);
+    }
+  }
+  
+  /* The Close Button (x) */
+  .modal2 .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .modal2 .close:hover,
+  .modal2 .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  /* Add Zoom Animation */
+  .modal2 .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .modal2 span.psw {
+       display: block;
+       float: none;
+    }
+    .modal2 .cancelbtn {
+       width: 100%;
+    }
+  }
+  .modal2 .formContainer {
+    width: 100%;
+    max-width: calc(100% - 9%);
+    margin: 0 auto;
+  }
+  .modal2 .formContainer label {
+    font-size: 20px;
+  }
+  .createAccount {
+    text-align: center;
+  }
+  .createAccount a {
+    margin-top: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: all 0.2s ease; 
+    text-align: center;
+  }
+  .createAccount:hover {
+    text-decoration: underline;
+  }
+  .watchImg {
+    height: auto;
+    width: 100%;
+    max-width: 297px;
+    position: absolute;
+    top: -167px;
+    rotate: -13deg;
+    left: -198px;
+    z-index: -1;
+  }
+  .necklaceImg {
+    position: absolute;
+    bottom: -94px;
+    width: 182%;
+    max-width: 222px;
+    rotate: 328deg;
+    right: -153px;
+    height: auto;
+    z-index: -1;
+  }
+  
+  .modalMainContent {
+    padding: 0 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #FFD700;
+    border-radius: 12px;
+    padding: 12px;
+    background-color: black;
+    width: 100%;
+    max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .labelProduct {
+    color: #FFD700;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+  .product-name {
+    color: white;
+    font-weight: 700;
+    margin: 0;
+  }
+  .product-price {
+    color: white;
+    font-weight: 700;
+  }
+  
+  .product-card img {
+    width: 100px;
+    height: 100px;
+    margin: 0px;
+    object-fit: cover;
+  }
+
+  .image-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .uploadProduct {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-top: 40px;
+  }
+
+  .uploadProduct a {
+    padding: 10px 20px;
+    background: #FFD700;
+    border: 1px solid #FFD700;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+  }
+  .uploadProduct a {
+    text-decoration: none;
+    color: black;
+    transition: all 0.5s ease;
+    border-radius: 12px;
+  }
+  .uploadProduct:hover a {
+    background-color: transparent;
+  }
+  .uploadProduct:hover a {
+    color: #FFD700;
+  }
+  .loginButton {
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.9s ease;
+    border: none;
+  }
+  .loginButton:hover {
+    border-bottom: 1px solid white;
+  }
+  .loginButton svg:hover {
+    border-bottom: none !important;
+  }
+  .mainLogo {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: "Kumar One", serif;
+    color: #FFD700;
+    text-decoration: none;
+    cursor: pointer;
+    padding-top: 10px;
+    text-align: center;
+    width: 33%;
+    @media (max-width:768px) {
+      width: auto;
+      font-size: 24px;
+    }
+  }
+  .productDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .color-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .color-circle {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .color-circle input[type="checkbox"] {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  .color-circle .circle {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s ease;
+  }
+  
+  .color-circle input[type="checkbox"]:checked + .circle {
+    border-color: #000; /* Highlight selected circle */
+  }
+  
+  /* Color-specific styles */
+  .color-circle .circle.golden {
+    background-color: gold;
+  }
+  
+  .color-circle .circle.silver {
+    background-color: silver;
+  }
+  
+  .color-circle .circle.black {
+    background-color: black;
+  }
+  .product-discount-price {
+    color: #FFD700; /* Gold color for discount price */
+    font-weight: bold;
+  }
+  .searchBoxMain {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #FFD700;
+    border-radius: 12px;
+    font-size: 16px;
+    color: white;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+  }
+.searchBoxMain input {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: white;
+  outline: none;
+}
+.searchBoxMain svg {
+  padding: 0 10px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  stroke: white;
+}
+
+#suggestionsBox {
+  position: absolute;
+  border: 1px solid #FFD700;
+  max-height: 200px;
+  overflow-y: auto;
+  background: transparent;
+  left: 0;
+  top: 120%;
+  border-radius: 12px;
+  width: 100%;
+  /* z-index: 1000; */
+  padding: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+.suggestionItem {
+  padding: 0px 5px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: #ffd7005c;
+}
+
+
+.categoryHeading {
+  font-size: 50px;
+  margin-bottom: 40px;
+  color: white;
+}
+.banner {
+  background-color: white;
+  text-align: center;
+  position: relative;
+  padding: 6px 20px;
+}
+.banner p {
+  color: black;
+  font-weight: 500;
+  font-size: 12px;
+  position: relative;
+  animation: bannerText 0.8s ease alternate;
+  margin: 0;
+}
+@keyframes bannerText {
+  0% {
+    top: 40px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.mainHomeContainer {
+  display: flex;
+  margin-top: 20px;
+  position: relative;
+  z-index: -1;
+}
+.homeTextContainer {
+  position: absolute;
+  top: 42%;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.mainHeading {
+  font-size: 60px;
+  padding: 0 20px;
+  font-weight: 400;
+  color: black;
+  font-family: "Abril Fatface", serif;
+  margin: 0;
+  @media (min-width:768px) and (max-width: 1024px) {
+    font-size: 40px;
+  }
+  @media (max-width:768px) {
+    font-size: 24px;
+  }
+}
+
+.containerHomeMainImages {
+  margin-top: 20px;
+  padding: 0 20px;
+  @media (max-width:768px) {
+    margin-top: 10px;
+  }
+}
+
+ .containerHomeMainImages h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+  margin: 0px;
+  @media (min-width:768px) and (max-width: 1024px) {
+    font-size: 18px;
+  }
+  @media (max-width:768px) {
+    font-size: 16px;
+  }
+}
+.imagesContainer {
+  width: 60%;
+  position: relative;
+  display: flex;
+  
+}
+.homeImg {
+  width: 33.3333%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 500px;
+  min-height: 350px;
+}
+.shopNowBtn {
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  background-color: #FFD700;
+  transition: all 0.5s ease;
+  border: 1px solid #FFD700;
+  margin-top: 20px;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.shopNowBtn:hover {
+  background-color: transparent;
+}
+.acceroiesContainer {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 50px;
+    @media (min-width:640px) and (max-width:1024px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+    }
+    @media (max-width:768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+}
+.acessorieImg {
+  width: 100%;
+  height: 325px;
+  position: relative;
+  @media (max-width:640px) {
+    width: 100%;
+    height: 228px;
+    position: relative;
+    object-fit: cover;
+  }
+}
+.acessorieImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.accesorieHeading {
+  font-size: 40px;
+  font-weight: 600;
+  color: white;
+}
+.accessorieName {
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  text-transform: capitalize;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 290px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+}
+.accessoriePageContainer {
+  padding: 0 40px;
+  @media (max-width:768px) {
+    padding: 0 20px;
+  }
+}
+.accessoriePrice {
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  margin: 0;
+}
+.discountPrice {
+position: absolute;
+bottom: 20px;
+display: flex;
+gap: 4px;
+background-color: #FFD700;
+padding: 12px;
+border-top-right-radius: 60px;
+border-bottom-right-radius: 60px;
+color: black;
+font-size: 18px;
+}
+.accessorieDiscount {
+  color: black;
+  margin: 0;
+  font-size: 18px;
+}
+.accessorieDetailContainer {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 40px;
+  @media (max-width:960px) {
+    flex-wrap: wrap;
+  }
+}
+.detailAcceroieName {
+  font-size: 50px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.detailAccresoriePrice {
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+  margin: 0;
+}
+.accrsorieOff {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.detailAcceories {
+  width: 50%;
+  @media (max-width:960px) {
+    width: 100%;
+  }
+}
+
+.backHomeButton {
+  background-color: #FFD700;
+  padding: 14px 20px;
+  border: 1px solid #FFD700;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+}
+.backHomeButton:hover {
+  background-color: transparent;
+  color: #FFD700;
+}
+.accessorieDetailContainer .swiper {
+  width: 50%;
+  height: 600px;
+  max-width: 100%;
+  @media (max-width:960px) {
+    width: 100%;
+  }
+}
+.accessorieDetailPageContainer {
+  padding: 60px 40px;
+  @media (min-width:768px) and (max-width:1024px) {
+    padding: 40px;
+  }
+  @media (max-width:768px) {
+    padding: 40px 20px;
+  }
+}
+.swiper-button-next, .swiper-button-prev {
+  color: #FFD700 !important;
+  cursor: pointer;
+  bottom: 10px;
+  top: auto !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #FFD700 !important;
+}
+.inputType {
+  border: 1px solid #FFD700;
+  border-radius: 12px;
+  background-color: transparent;
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  color: white;
+  padding: 14px 20px;
+  outline: none;
+  width: 90%;
+}
+.selectColorMain {
+  display: flex;
+  gap: 14px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 10px;
+  align-items: center;
+}
+.goldenColor {
+  background-color: #FFD700;
+}
+.blackColor {
+  background-color: #000;
+}
+.silverColor {
+  background-color: silver;
+}
+.selectColor {
+  width: 20px;
+  height: 20px;
+}
+.selectColorContainer{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+}
+.selectColorContainer label {
+  font-size: 24px;
+  color: #FFD700;
+}
+.selected {
+  border: 2px solid red; /* Highlight the selected color */
+}
+.buyNowBtn {
+  background-color: #FFD700;
+  border: 1px solid #FFD700;
+  padding: 20px 12px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  transition: all 0.5s ease;
+  border-radius: 40px;
+  margin-top: 24px;
+}
+.buyNowBtn:hover {
+  background-color: transparent;
+  color: #FFD700;
+}
+.payNowBtn {
+  background-color: black;
+  border: 1px solid black;
+  padding: 20px 12px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  color: #FFD700;
+  transition: all 0.5s ease;
+  border-radius: 40px;
+  margin-top: 24px;
+  cursor: pointer;
+}
+.addToCart {
+  background-color: transparent;
+  border: 1px solid #FFD700;
+  padding: 20px 12px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  color: #FFD700;
+  transition: all 0.5s ease;
+  border-radius: 40px;
+  margin-top: 24px;
+}
+.addToCart:hover {
+  background-color: #FFD700;
+  color: black;
+}
+.cartLink {
+  text-decoration: none;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#cartCount {
+  font-size: 14px;
+  color: #FFD700;
+  position: absolute;
+  right: -1px;
+  top: -11px;
+}
+.product-description {
+  word-wrap: break-word;
+}
+.detailLabel {
+  font-size: 24px;
+    font-weight: 500;
+    color: #FFD700;
+    margin: 0;
+    margin-top: 20px;
+}
+#productDescription {
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.confirmedResult {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 94%;
+  justify-content: space-between;
+}
+.paymentMethodContainer {
+  padding: 40px 20px;
+}
+.paymentMethodHead {
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+}
+.methodContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.paymentMethodContainer button {
+  border: 1px solid #FFD700;
+  border-radius: 12px;
+  width: 100%;
+  padding:14px 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.iconsvg {
+  width: 24px;
+  height: 24px;
+}
+.arrow {
+  width: 24px;
+  height: 24px;
+}
+button {
+  cursor: pointer;
+}
+.modalMainContainer {
+  background-color: #000000e3;
+  width: 100%;
+  position: absolute;
+  top:0;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalDataContainer {
+  width: 90%;
+  max-width: 500px;
+  max-height: 700px;
+  overflow-y: auto;
+  padding: 24px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: #FFD700;
+  @media (max-width:768px) {
+      padding: 20px;
+      height: 100%;
+      max-height: 100%;
+  }
+}
+.formBuyNow {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.formBuyNow label {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  text-transform: capitalize;
+}
+.formBuyNow input {
+  width: 90%;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 14px 14px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.countryInput {
+  width: 90%;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 14px 14px;
+  outline: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.hideScroll::-webkit-scrollbar {
+  display: none;
+}
+.cancelBtn {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 40px;
+  padding: 14px 14px;
+  outline: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  margin-top: 10px;
+  transition: all 0.5s ease;
+}
+.cancelBtn:hover {
+  background-color: #000;
+  color: white;
+}
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  background: #9f9e9eab;
+  padding: 20px 0;
+  bottom: 0 !important;
+}
+.cart-list {
+  display: grid;
+  padding: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 50px;
+  @media (min-width:640px) and (max-width:1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+  @media (max-width:768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+.cart-list li {
+  list-style-type: none;
+}
+.cart-list li a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+.cart-list li img {
+  width: 100%;
+  height: 325px;
+  position: relative;
+  object-fit: cover;
+  @media (max-width:640px) {
+    width: 100%;
+    height: 228px;
+    position: relative;
+  }
+}
+
+.categoryHeading {
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-top: 40px;
+  @media (max-width:768px) {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+}
+.categoryMainContainer {
+  padding: 0 40px;
+  margin-top: 30px;
+  @media (max-width:768px) {
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+}
+.categoryMainContainer h3 {
+  font-size: 40px;
+  font-weight: 600;
+  color: white;
+  @media (max-width:768px) {
+    font-size: 28px;
+  }
+}
+.vieMoreBtn {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  background-color: #FFD700;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border: 1px solid #FFD700;
+  transition: all 0.5s ease;
+  outline: none;
+  @media (max-width:768px) {
+    margin-bottom: 30px;
+  }
+}
+.vieMoreBtn:hover {
+  background-color: transparent;
+  color: #FFD700;
+}
+.categorySelect {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 14px;
+  width: 33%;
+  @media (max-width:768px) {
+    display: none;
+  }
+}
+.categorySelect a {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  color: #FFD700;
+}
+.bannerContainer {
+  position: relative;
+  background-color: #FFD700;
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  gap: 32px;
+}
+
+.bannerContainer p {
+  font-size: 32px;
+  font-weight: 700;
+  color: black;
+  white-space: nowrap; 
+  margin: 0;
+  animation: moveText 3s linear infinite; 
+  @media (max-width:768px) {
+    font-size: 24px;
+  }
+}
+
+@keyframes moveText {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-250%);
+  }
+}
+.menuContainer {
+  display: none;
+  @media (max-width:768px) {
+    display: flex;
+  }
+}
+.loginButton p {
+  margin: 0;
+  display: block;
+  @media (max-width:768px) {
+    display: none;
+  }
+}
+.socialIconsMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  position: absolute;
+  top: 7px;
+  right: 78px;
+}
+.socialIconsMain img {
+  width: 20px;
+  height: 20px;
+}
+.whatsaapIcon {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 9999;
+}
+.whatsaapIcon img  {
+  width: 100%;
+  height: 100%;
+}

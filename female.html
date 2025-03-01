@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wrist&Neck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumar+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./input.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Kumar+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <script src="./female.js"></script>
+  </head>
+  <body>
+    <div class="banner">
+      <p>Free Delivery Above PKR 3000</p>
+    </div>
+    <nav class="container">
+      <div class="navMain">
+      <div class="navContainer">
+
+   
+          <div class="categorySelect">
+            <a href="./male.html">Male</a>
+            <a href="./female.html">Female</a>
+            <a href="./uniSex.html">UniSex</a>
+          </div>
+ 
+        
+        <!-- <div onclick="openNav()" class="menuContainer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="menuIcon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+            >&times;</a
+          >
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a>
+        </div> -->
+        <a href="./index.html" class="mainLogo">WristnNeck</a>
+        <div class="iconContainer">
+          <a style="display: flex;" class="loginButton" id="profileLink">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav" id="loginIcon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+          </a>
+          
+          <a href="./addCart.html" class="cartLink">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <span id="cartCount">0</span>
+        </a>
+        </div>
+
+      </div>
+    </div>
+    </nav>
+
+
+
+    <div class="categoryMainContainer">
+
+    <h3>Female</h3>
+    <div id="girlsProducts" class="acceroiesContainer"></div>
+  </div>
+        
+        <!-- Template for Product Card -->
+        <template id="productCardTemplate">
+
+          <button type="button" style="background-color: transparent; border: none;">        
+            <div class="acessorieImg"> <div class="discountPrice"> <p class="accessorieDiscount"></p> off </div>  </div>
+            <p class="accessorieName"></p>
+            <span style="display: flex; align-items: center; font-size:20px; color: white; gap:12px">
+            PKR <p class="accessoriePrice"></p></span>
+          </button>
+        </template>
+        <script>
+          // Update the cart count when the page loads
+          document.addEventListener("DOMContentLoaded", () => {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartCountElement = document.getElementById("cartCount");
+    
+            // Calculate the total number of items in the cart
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    
+            // Update the cart count
+            cartCountElement.textContent = totalItems;
+          });
+        </script>
+
+  </body>
+</html>
