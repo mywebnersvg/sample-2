@@ -185,68 +185,65 @@
     <script>
       // Define the global array to store image URLs
       const imageUrls = [];
-    
-      const fileInput = document.getElementById("fileUpload");
-      const profileBoxContainer = document.getElementById("profileBoxContainer");
-    
-      // Handle file selection
-      fileInput.addEventListener("change", (event) => {
-        const files = Array.from(event.target.files); // Get all selected files
-    
-        files.forEach((file) => {
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-              const imageUrl = reader.result; // Store image data URL
-    
-              // Add the image URL to the global array
-              imageUrls.push(imageUrl);
-    
-              // Create a new profile box
-              const profileBox = document.createElement("div");
-              profileBox.classList.add("profile-box");
-    
-              // Add the uploaded image
-              const img = document.createElement("img");
-              img.src = imageUrl;
-              img.classList.add("profile-photo");
-              img.width = 100;
-              img.height = 100;
-    
-              // Add a delete button
-              const deleteBtn = document.createElement("button");
-              deleteBtn.classList.add("delete-btn");
-              deleteBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" style="width: 20px; height: 20px;">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-              `;
-    
-              // Add event listener to delete button
-              deleteBtn.addEventListener("click", () => {
-                // Remove the image from the DOM
-                profileBox.remove();
-    
-                // Remove the image from the global array
-                const index = imageUrls.indexOf(imageUrl);
-                if (index > -1) {
-                  imageUrls.splice(index, 1);
-                }
-              });
-    
-              // Append elements to profile box
-              profileBox.appendChild(img);
-              profileBox.appendChild(deleteBtn);
-    
-              // Add the new profile box to the container
-              profileBoxContainer.appendChild(profileBox);
-            };
-            reader.readAsDataURL(file);
+
+const fileInput = document.getElementById("fileUpload");
+const profileBoxContainer = document.getElementById("profileBoxContainer");
+
+fileInput.addEventListener("change", (event) => {
+  const files = Array.from(event.target.files); // Get all selected files
+
+  files.forEach((file) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageUrl = reader.result; // Store image data URL (base64)
+
+        // Add the image URL to the global array
+        imageUrls.push(imageUrl);
+
+        // Create a new profile box
+        const profileBox = document.createElement("div");
+        profileBox.classList.add("profile-box");
+
+        // Add the uploaded image
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        img.classList.add("profile-photo");
+        img.width = 100;
+        img.height = 100;
+
+        // Add a delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-btn");
+        deleteBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" style="width: 20px; height: 20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        `;
+
+        // Add event listener to delete button
+        deleteBtn.addEventListener("click", () => {
+          // Remove the image from the DOM
+          profileBox.remove();
+
+          // Remove the image from the global array
+          const index = imageUrls.indexOf(imageUrl);
+          if (index > -1) {
+            imageUrls.splice(index, 1);
           }
         });
-      });
-    
-      // Handle form submission
+
+        // Append elements to profile box
+        profileBox.appendChild(img);
+        profileBox.appendChild(deleteBtn);
+
+        // Add the new profile box to the container
+        profileBoxContainer.appendChild(profileBox);
+      };
+      reader.readAsDataURL(file); // Convert image to base64
+    }
+  });
+});
    // Handle form submission
    document.getElementById("uploadForm").addEventListener("submit", async function (event) {
   event.preventDefault();
