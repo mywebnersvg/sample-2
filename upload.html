@@ -248,40 +248,46 @@
     
       // Handle form submission
    // Handle form submission
-   document.getElementById("uploadForm").addEventListener("submit", function (event) {
+   document.getElementById("uploadForm").addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const name = document.getElementById("productName").value;
   const price = document.getElementById("productPrice").value;
   const discount = document.getElementById("productDiscount").value;
   const category = document.getElementById("productCategory").value;
-  const description = document.getElementById("productDescription").value; // Retrieve the description
-
-  // Retrieve existing products from localStorage or initialize an empty array
-  const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
+  const description = document.getElementById("productDescription").value;
 
   // Create a new product object
   const newProduct = {
     name: name,
     price: price,
     images: imageUrls, // Use the array of image URLs
-    discount: discount, // Add discount
-    category: category, // Add category
-    description: description // Add description
+    discount: discount,
+    category: category,
+    description: description,
   };
 
-  // Add the new product to the existing products array
-  existingProducts.push(newProduct);
+  // Send the product data to the backend server
+  try {
+    const response = await fetch("http://localhost:3000/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    });
 
-  // Save the updated products array to localStorage
-  localStorage.setItem("products", JSON.stringify(existingProducts));
-
-  // Redirect to home page or clear the form
-  window.location.href = ""; // Update with the desired URL or remove this line to stay on the same page
+    if (response.ok) {
+      alert("Product uploaded successfully!");
+      window.location.href = "./index2.html"; // Redirect to home page
+    } else {
+      alert("Failed to upload product.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 });
-
-
-    </script>
+</script>
     
     
 </body>

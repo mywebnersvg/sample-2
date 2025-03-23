@@ -45,56 +45,102 @@ window.onclick = function (event) {
       }
     }
   });
-  document.addEventListener("DOMContentLoaded", () => {
-    const productData = JSON.parse(localStorage.getItem("products")) || [];
-    const boysProductsContainer = document.getElementById("boysProducts");
-    const girlsProductsContainer = document.getElementById("girlsProducts");
-    const bothProductsContainer = document.getElementById("bothProducts");
-    const productCardTemplate = document.getElementById("productCardTemplate");
+//   document.addEventListener("DOMContentLoaded", () => {
+//     const productData = JSON.parse(localStorage.getItem("products")) || [];
+//     const boysProductsContainer = document.getElementById("boysProducts");
+//     const girlsProductsContainer = document.getElementById("girlsProducts");
+//     const bothProductsContainer = document.getElementById("bothProducts");
+//     const productCardTemplate = document.getElementById("productCardTemplate");
 
-    function displayProducts() {
-        boysProductsContainer.innerHTML = "";
-        girlsProductsContainer.innerHTML = "";
-        bothProductsContainer.innerHTML = "";
+//     function displayProducts() {
+//         boysProductsContainer.innerHTML = "";
+//         girlsProductsContainer.innerHTML = "";
+//         bothProductsContainer.innerHTML = "";
 
-        if (productData.length > 0) {
+//         if (productData.length > 0) {
 
-        productData.forEach((product) => {
-            const { name, price, images, discount, category } = product;
-            const productCard = productCardTemplate.content.cloneNode(true);
+//         productData.forEach((product) => {
+//             const { name, price, images, discount, category } = product;
+//             const productCard = productCardTemplate.content.cloneNode(true);
 
-            productCard.querySelector(".accessorieName").textContent = name;
-            productCard.querySelector(".accessoriePrice").textContent = price;
-            productCard.querySelector(".accessorieDiscount").textContent = discount ? `${discount}%` : "";
+//             productCard.querySelector(".accessorieName").textContent = name;
+//             productCard.querySelector(".accessoriePrice").textContent = price;
+//             productCard.querySelector(".accessorieDiscount").textContent = discount ? `${discount}%` : "";
 
-            const imageContainer = productCard.querySelector(".acessorieImg");
-            if (images && images.length > 0) {
-                const img = document.createElement("img");
-                img.src = images[0];
-                img.alt = name;
-                imageContainer.appendChild(img);
-            }
-            const productButton = productCard.querySelector("button");
-            productButton.addEventListener("click", () => {
-              localStorage.setItem("selectedProduct", JSON.stringify(product));
-              window.location.href = "acessorieDetail.html";
-            });
+//             const imageContainer = productCard.querySelector(".acessorieImg");
+//             if (images && images.length > 0) {
+//                 const img = document.createElement("img");
+//                 img.src = images[0];
+//                 img.alt = name;
+//                 imageContainer.appendChild(img);
+//             }
+//             const productButton = productCard.querySelector("button");
+//             productButton.addEventListener("click", () => {
+//               localStorage.setItem("selectedProduct", JSON.stringify(product));
+//               window.location.href = "acessorieDetail.html";
+//             });
     
-            if (category === "Boys") {
-                boysProductsContainer.appendChild(productCard);
-            } else if (category === "Girls") {
-                girlsProductsContainer.appendChild(productCard);
-            } else if (category === "Both") {
-                bothProductsContainer.appendChild(productCard);
-            }
-        });
-    }
-    }
+//             if (category === "Boys") {
+//                 boysProductsContainer.appendChild(productCard);
+//             } else if (category === "Girls") {
+//                 girlsProductsContainer.appendChild(productCard);
+//             } else if (category === "Both") {
+//                 bothProductsContainer.appendChild(productCard);
+//             }
+//         });
+//     }
+//     }
 
-    displayProducts();
+//     displayProducts();
+// });
+  
+  
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const boysProductsContainer = document.getElementById("boysProducts");
+  const girlsProductsContainer = document.getElementById("girlsProducts");
+  const bothProductsContainer = document.getElementById("bothProducts");
+  const productCardTemplate = document.getElementById("productCardTemplate");
+
+  // Fetch products from the backend server
+  try {
+    const response = await fetch("http://localhost:3000/api/products");
+    const productData = await response.json();
+
+    // Display products
+    productData.forEach((product) => {
+      const productCard = productCardTemplate.content.cloneNode(true);
+
+      productCard.querySelector(".accessorieName").textContent = product.name;
+      productCard.querySelector(".accessoriePrice").textContent = product.price;
+      productCard.querySelector(".accessorieDiscount").textContent = product.discount ? `${product.discount}%` : "";
+
+      const imageContainer = productCard.querySelector(".acessorieImg");
+      if (product.images && product.images.length > 0) {
+        const img = document.createElement("img");
+        img.src = product.images[0];
+        img.alt = product.name;
+        imageContainer.appendChild(img);
+      }
+
+      const productButton = productCard.querySelector("button");
+      productButton.addEventListener("click", () => {
+        localStorage.setItem("selectedProduct", JSON.stringify(product));
+        window.location.href = "acessorieDetail.html";
+      });
+
+      if (product.category === "Boys") {
+        boysProductsContainer.appendChild(productCard);
+      } else if (product.category === "Girls") {
+        girlsProductsContainer.appendChild(productCard);
+      } else if (product.category === "Both") {
+        bothProductsContainer.appendChild(productCard);
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
 });
-  
-  
   
   document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.querySelector("input[type='search']");
@@ -174,4 +220,3 @@ window.onclick = function (event) {
   }
   
   animateMarquee();
-
