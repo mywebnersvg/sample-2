@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Kumar+One&display=swap" rel="stylesheet">
     <script src="./input.js"></script>
+    <style>
+      /* Add these styles for mobile search */
+    </style>
   </head>
   <body>
     <nav class="container">
@@ -62,8 +65,15 @@
                   d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
                 />
               </svg>
-       
-            </div>
+          </div>
+          
+          <!-- Mobile search toggle button -->
+          <button class="mobile-search-toggle" id="mobileSearchToggle">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </button>
+          
           <a style="display: flex;" class="loginButton" id="profileLink">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconNav" id="loginIcon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -85,25 +95,39 @@
             />
           </svg>
         </div>
-
       </div>
     </div>
     </nav>
-
+  
+    <!-- Mobile Search Container (hidden by default) -->
+  
     <div>
       <button type="button" class="uploadProduct">
         <a href="./upload.html">Upload Image</a>
       </button>
     </div>
+    <div class="mobile-search-container" id="mobileSearchContainer">
+      <div class="mobile-search-box">
+        <input type="search" id="mobileSearchInput" placeholder="Search products...">
+        <div class="mobile-search-icon" id="mobileSearchButton">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
+      </div>
+      <div id="mobileSuggestionsBox"></div>
+    </div>
+    
+    <h3 class="categoryHeading">Boys</h3>
+    <div id="boysProducts" class="productDisplay"></div>
 
-<h3 class="categoryHeading">Boys</h3>
-<div id="boysProducts" class="productDisplay"></div>
+    <h3 class="categoryHeading">Girls</h3>
+    <div id="girlsProducts" class="productDisplay"></div>
 
-<h3 class="categoryHeading">Girls</h3>
-<div id="girlsProducts" class="productDisplay"></div>
+    <h3 class="categoryHeading">Both</h3>
+    <div id="bothProducts" class="productDisplay"></div>
 
-<h3 class="categoryHeading">Both</h3>
-<div id="bothProducts" class="productDisplay"></div>
+    <a href="./oreders.html" class="ordersBtn">Orders</a>
     
     <!-- Template for Product Card -->
     <template id="productCardTemplate">
@@ -119,6 +143,8 @@
       </div>
     </template>
 
-
+    <script>
+      // Modal Logic
+    </script>
   </body>
 </html>

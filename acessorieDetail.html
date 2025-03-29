@@ -559,52 +559,44 @@ function validateForm() {
 }
 
 
+// Use this EXACT fetch structure
 async function payNow() {
     if (!validateForm()) {
-        return; // Stop execution if form is invalid
+        return;
     }
 
-    const waitingPopup = document.getElementById("waitingPopup");
-    waitingPopup.style.display = "flex";
+    // Show waiting popup
+    document.getElementById('waitingPopup').style.display = 'flex';
 
-    // Collect form data
-    const orderDetails = {
-        name: document.getElementById("name").value.trim(),
-        phoneNumber: document.getElementById("phoneNumber").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        city: document.getElementById("cityInput").value.trim(),
-        address: document.getElementById("address").value.trim(),
-        productName: document.getElementById("productName").textContent,
+    // Prepare order data
+    const orderData = {
+        name: document.getElementById("name").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        email: document.getElementById("email").value,
+        city: document.getElementById("cityInput").value,
+        address: document.getElementById("address").value,
         quantity: document.getElementById("quantityValue").textContent,
-        selectedColor: document.getElementById("selectedColor").textContent,
+        color: document.getElementById("selectedColor").textContent,
         totalPrice: document.getElementById("FullPrice").textContent,
-        productImages: Array.from(document.querySelectorAll(".swiper-slide img")).map(img => img.src)
+        productName: document.getElementById("productName").textContent,
+        productPrice: document.getElementById("productPrice").textContent,
+        date: new Date().toLocaleString()
     };
 
-    try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwnVqaCB52-nPwZiYTXjvld9Zy7elvzWSi8xbneFBVMey3VXIckEAQZ5L5h330zl0Na/exec', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(orderDetails)
-});
+    // Save to localStorage
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    orders.push(orderData);
+    localStorage.setItem('orders', JSON.stringify(orders));
 
-        const result = await response.json();
-        waitingPopup.style.display = "none"; // Hide loading indicator
-
-        if (result.success) {
-            localStorage.setItem("orders", JSON.stringify([...JSON.parse(localStorage.getItem("orders") || "[]"), orderDetails]));
-            alert('Order placed successfully! An email has been sent.');
-            clearFormFields();
-        } else {
-            alert('Failed to send email. Please try again.');
-        }
-    } catch (error) {
-        waitingPopup.style.display = "none";
-        alert('An error occurred. Please try again.');
-    }
+    // Simulate processing delay
+    setTimeout(() => {
+        document.getElementById('waitingPopup').style.display = 'none';
+        alert("Order is successful! For details contact +923214566117");
+        clearFormFields();
+        cancelBtn();
+        
+    }, 2000);
 }
-
-
 function clearFormFields() {
     // Clear input fields
     document.getElementById("name").value = "";

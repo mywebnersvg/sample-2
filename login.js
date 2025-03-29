@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = form.querySelector('input[name="psw"]').value;
 
     // Specific credentials for index.html
-    const specificEmail = "anusn2914@gmail.com";
+    const specificEmail = "wristnneck786@gmail.com";
     const specificPassword = "Pakistan+92";
 
     // Validate credentials

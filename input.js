@@ -1,4 +1,3 @@
-// Modal Logic
 window.onclick = function (event) {
   const loginModal = document.getElementById("loginModal");
   const signUpModal = document.getElementById("signUpModal");
@@ -44,88 +43,35 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
   }
+  
+  // Mobile search toggle functionality
+  const mobileSearchToggle = document.getElementById("mobileSearchToggle");
+  const mobileSearchContainer = document.getElementById("mobileSearchContainer");
+  
+  mobileSearchToggle.addEventListener("click", () => {
+    mobileSearchContainer.classList.toggle("active");
+    if (mobileSearchContainer.classList.contains("active")) {
+      document.getElementById("mobileSearchInput").focus();
+    }
+  });
 });
-// document.addEventListener("DOMContentLoaded", () => {
-//   const productData = JSON.parse(localStorage.getItem("products")) || [];
-//   const boysProductsContainer = document.getElementById("boysProducts");
-//   const girlsProductsContainer = document.getElementById("girlsProducts");
-//   const bothProductsContainer = document.getElementById("bothProducts");
-//   const productCardTemplate = document.getElementById("productCardTemplate");
 
-//   function displayProducts() {
-//     // Clear all containers before displaying products
-//     boysProductsContainer.innerHTML = "";
-//     girlsProductsContainer.innerHTML = "";
-//     bothProductsContainer.innerHTML = "";
-
-//     if (productData.length > 0) {
-//       productData.forEach((product, index) => {
-//         const { name, price, images, discount, category, description } = product;
-//         const productCard = productCardTemplate.content.cloneNode(true);
-
-//         // Populate the product card
-//         productCard.querySelector(".product-name").textContent = name;
-//         productCard.querySelector(".product-price").textContent = price;
-//         const discountElement = productCard.querySelector(".product-discount");
-//         discountElement.textContent = discount ? `${discount}%` : "No discount";
-//         productCard.querySelector(".product-description").textContent = description || "No description available";
-
-//         const imageContainer = productCard.querySelector(".image-container");
-//         images.forEach((image) => {
-//           const img = document.createElement("img");
-//           img.src = image;
-//           img.alt = "Product Image";
-//           imageContainer.appendChild(img);
-//         });
-
-//         // Add delete functionality
-//         const deleteButton = productCard.querySelector("svg");
-//         deleteButton.addEventListener("click", () => {
-//           const updatedProducts = productData.filter((_, i) => i !== index);
-//           productData.length = 0;
-//           productData.push(...updatedProducts);
-//           localStorage.setItem("products", JSON.stringify(updatedProducts));
-//           displayProducts(); // Refresh the display
-//         });
-
-//         // Append the product card to the correct container based on category
-//         if (category === "Boys") {
-//           boysProductsContainer.appendChild(productCard);
-//         } else if (category === "Girls") {
-//           girlsProductsContainer.appendChild(productCard);
-//         } else if (category === "Both") {
-//           bothProductsContainer.appendChild(productCard);
-//         }
-//       });
-//     } else {
-//       // If no products are found, display a message in all containers
-//       boysProductsContainer.innerHTML = `<p>No products found for Boys.</p>`;
-//       girlsProductsContainer.innerHTML = `<p>No products found for Girls.</p>`;
-//       bothProductsContainer.innerHTML = `<p>No products found for Both.</p>`;
-//     }
-//   }
-
-//   // Initial display of products
-//   displayProducts();
-// });
-
-
+// Product display and search functionality
 document.addEventListener("DOMContentLoaded", async () => {
   const boysProductsContainer = document.getElementById("boysProducts");
   const girlsProductsContainer = document.getElementById("girlsProducts");
   const bothProductsContainer = document.getElementById("bothProducts");
   const productCardTemplate = document.getElementById("productCardTemplate");
-
-  // Fetch products from the backend server
-  try {
-    const response = await fetch("http://localhost:3000/api/products");
-    const productData = await response.json();
-
-    // Display products
-    productData.forEach((product, index) => {
+  
+  // Common function to display products
+  function displayProducts(products) {
+    boysProductsContainer.innerHTML = "";
+    girlsProductsContainer.innerHTML = "";
+    bothProductsContainer.innerHTML = "";
+    
+    products.forEach((product, index) => {
       const productCard = productCardTemplate.content.cloneNode(true);
 
-      // Populate the product card
       productCard.querySelector(".product-name").textContent = product.name;
       productCard.querySelector(".product-price").textContent = product.price;
       const discountElement = productCard.querySelector(".product-discount");
@@ -140,10 +86,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         imageContainer.appendChild(img);
       });
 
-      // Add delete functionality
       const deleteButton = productCard.querySelector("svg");
       deleteButton.addEventListener("click", async () => {
-        // Send a DELETE request to the backend server
         try {
           const deleteResponse = await fetch(`http://localhost:3000/api/products/${index}`, {
             method: "DELETE",
@@ -151,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           if (deleteResponse.ok) {
             alert("Product deleted successfully!");
-            window.location.reload(); // Refresh the page to update the product list
+            window.location.reload();
           } else {
             alert("Failed to delete product.");
           }
@@ -160,7 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
-      // Append the product card to the correct container based on category
       if (product.category === "Boys") {
         boysProductsContainer.appendChild(productCard);
       } else if (product.category === "Girls") {
@@ -169,106 +112,153 @@ document.addEventListener("DOMContentLoaded", async () => {
         bothProductsContainer.appendChild(productCard);
       }
     });
+  }
+
+  // Fetch and display products
+  try {
+    const response = await fetch("http://localhost:3000/api/products");
+    const productData = await response.json();
+    displayProducts(productData);
+    
+    // Set up search functionality for both desktop and mobile
+    setupSearch(document.querySelector("input[type='search']"), document.getElementById("suggestionsBox"), displayProducts);
+    setupSearch(document.getElementById("mobileSearchInput"), document.getElementById("mobileSuggestionsBox"), displayProducts);
+    
+    // Set up search button for mobile
+    document.getElementById("mobileSearchButton").addEventListener("click", () => {
+      const query = document.getElementById("mobileSearchInput").value;
+      performSearch(query, displayProducts);
+    });
   } catch (error) {
     console.error("Error fetching products:", error);
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector("input[type='search']");
-  const suggestionsBox = document.getElementById("suggestionsBox");
-  const searchButton = document.getElementById("searchButton");
-
-  // Load products from localStorage
-  const productData = JSON.parse(localStorage.getItem("products")) || [];
-
-  // Function to filter products based on search query
-  function filterProducts(query) {
-    if (!query) {
-      suggestionsBox.innerHTML = ""; // Clear when input is empty
-      suggestionsBox.classList.add("hidden");
-      return;
-    }
-
-    const filteredProducts = productData.filter(product =>
-      product.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    // Display results
-    displaySuggestions(filteredProducts);
-  }
-
-  // Function to display filtered products
-  function displaySuggestions(products) {
-    suggestionsBox.innerHTML = ""; // Clear previous suggestions
-
-    if (products.length === 0) {
-      suggestionsBox.innerHTML = "<p>No matching products found.</p>";
-    } else {
-      products.forEach(product => {
-        const suggestion = document.createElement("div");
-        suggestion.classList.add("suggestionItem");
-        suggestion.textContent = product.name;
-        suggestion.addEventListener("click", () => {
-          searchInput.value = product.name; // Set input to selected product
-          suggestionsBox.innerHTML = ""; // Clear suggestions
-          suggestionsBox.classList.add("hidden");
-        });
-        suggestionsBox.appendChild(suggestion);
-      });
-    }
-
-    suggestionsBox.classList.remove("hidden"); // Show suggestions
-  }
-
-  // Attach event listeners
-  searchInput.addEventListener("input", (e) => {
-    filterProducts(e.target.value);
+// Common search setup function
+function setupSearch(inputElement, suggestionsBox, displayFunction) {
+  inputElement.addEventListener("input", async (e) => {
+    const products = await filterProducts(e.target.value);
+    displaySuggestions(products, suggestionsBox);
   });
-
-  // Hide suggestions when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
-      suggestionsBox.classList.add("hidden");
+  
+  // Handle pressing Enter key
+  inputElement.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      performSearch(inputElement.value, displayFunction);
+      suggestionsBox.style.display = "none";
     }
   });
-
-  // Enable search button click functionality
-  searchButton.addEventListener("click", () => {
-    filterProducts(searchInput.value);
-  });
-});
-
-const marqueeText = document.querySelector('.marquee-text');
-let position = window.innerWidth;
-
-function animateMarquee() {
-    position -= 2; // Adjust speed by changing the decrement value
-    if (position < -marqueeText.offsetWidth) {
-        position = window.innerWidth; // Reset position after it moves out
-    }
-    marqueeText.style.transform = `translateX(${position}px)`;
-    requestAnimationFrame(animateMarquee);
 }
 
-animateMarquee();
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Function to update the cart count
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById("cartCount").textContent = totalItems;
+// Common function to filter products
+async function filterProducts(query) {
+  if (!query) return [];
+  
+  try {
+    const response = await fetch("http://localhost:3000/api/products");
+    const products = await response.json();
+    return products.filter(product =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
   }
+}
 
-  // Update cart count on page load
-  updateCartCount();
+// Common function to display suggestions
+function displaySuggestions(products, suggestionsBox) {
+  suggestionsBox.innerHTML = "";
+  
+  if (products.length === 0) {
+    suggestionsBox.innerHTML = "<p>No matching products found.</p>";
+  } else {
+    products.forEach(product => {
+      const suggestion = document.createElement("div");
+      suggestion.classList.add(products === document.getElementById("mobileSuggestionsBox") ? "mobile-suggestion-item" : "suggestionItem");
+      
+      const suggestionContent = document.createElement("div");
+      suggestionContent.style.display = "flex";
+      suggestionContent.style.alignItems = "center";
+      suggestionContent.style.gap = "10px";
+      
+      if (product.images && product.images.length > 0) {
+        const img = document.createElement("img");
+        img.src = product.images[0];
+        img.alt = product.name;
+        img.style.width = "30px";
+        img.style.height = "30px";
+        img.style.objectFit = "cover";
+        suggestionContent.appendChild(img);
+      }
+      
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = product.name;
+      suggestionContent.appendChild(nameSpan);
+      
+      const priceSpan = document.createElement("span");
+      priceSpan.textContent = `$${product.price}`;
+      priceSpan.style.marginLeft = "auto";
+      priceSpan.style.fontWeight = "bold";
+      suggestionContent.appendChild(priceSpan);
+      
+      suggestion.appendChild(suggestionContent);
+      
+      suggestion.addEventListener("click", () => {
+        const inputElement = suggestionsBox === document.getElementById("mobileSuggestionsBox") 
+          ? document.getElementById("mobileSearchInput")
+          : document.querySelector("input[type='search']");
+        
+        inputElement.value = product.name;
+        suggestionsBox.style.display = "none";
+        highlightProduct(product);
+      });
+      
+      suggestionsBox.appendChild(suggestion);
+    });
+  }
+  
+  suggestionsBox.style.display = "block";
+}
 
-  // Optionally, you can listen for changes in localStorage to update the cart count dynamically
-  window.addEventListener("storage", (event) => {
-    if (event.key === "cart") {
-      updateCartCount();
+// Common function to perform search
+async function performSearch(query, displayFunction) {
+  const products = await filterProducts(query);
+  if (products.length > 0) {
+    displayFunction(products);
+    if (products.length === 1) {
+      highlightProduct(products[0]);
     }
+  }
+}
+
+// Common function to highlight product
+function highlightProduct(product) {
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.style.border = 'none';
   });
+  
+  const allProducts = document.querySelectorAll('.product-card');
+  for (const card of allProducts) {
+    const nameElement = card.querySelector('.product-name');
+    if (nameElement && nameElement.textContent === product.name) {
+      card.style.border = '2px solid #ff0000';
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      break;
+    }
+  }
+}
+
+// Hide suggestions when clicking outside
+document.addEventListener("click", (e) => {
+  const desktopSearch = document.querySelector(".searchBoxMain");
+  const mobileSearch = document.getElementById("mobileSearchContainer");
+  
+  if (!desktopSearch.contains(e.target)) {
+    document.getElementById("suggestionsBox").style.display = "none";
+  }
+  
+  if (!mobileSearch.contains(e.target) && e.target !== document.getElementById("mobileSearchToggle")) {
+    document.getElementById("mobileSuggestionsBox").style.display = "none";
+  }
 });
